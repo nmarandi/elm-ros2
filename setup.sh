@@ -1,0 +1,21 @@
+#!/bin/bash
+
+#installing localstack
+python3 -m pip install --upgrade localstack
+
+#installing awscli
+python3 -m pip install --upgrade awscli
+python3 -m pip install awscli-local
+python3 -m pip install terraform-local
+#installing terraform
+# check if terraform is already installed
+if [ -x "$(command -v terraform)" ]; then
+  echo "Terraform is already installed"
+  exit 1
+fi
+# if terraform is not installed, install it
+sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
+wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt-get install terraform
