@@ -1,12 +1,6 @@
 #!/bin/bash
-
-#installing localstack
-python3 -m pip install --upgrade localstack
-
 #installing awscli
 python3 -m pip install --upgrade awscli
-python3 -m pip install awscli-local
-python3 -m pip install terraform-local
 #installing terraform
 # check if terraform is already installed
 if [ -x "$(command -v terraform)" ]; then
