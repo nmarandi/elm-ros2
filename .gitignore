@@ -99,5 +99,4 @@ CATKIN_IGNORE
 
 # colcon/CMake output
 build
-install
 log
