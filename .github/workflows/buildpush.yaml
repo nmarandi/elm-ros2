@@ -39,7 +39,6 @@ jobs:
           tags: ${{ secrets.ACCOUNT_ID }}.${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:latest
 
   terraform:
-    needs: build
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch'
 
