@@ -5,6 +5,8 @@ on:
     branches:
       - main
 
+  workflow_dispatch
+
 env:
   ECR_REGISTRY: dkr.ecr.us-east-2.amazonaws.com
   ECR_REPOSITORY: elm-ros2-repo
@@ -13,6 +15,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.event_name != 'workflow_dispatch'
 
     steps:
       - name: Checkout code
