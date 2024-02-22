@@ -4,8 +4,7 @@ on:
   push:
     branches:
       - main
-
-  workflow_dispatch
+  workflow_dispatch:
 
 env:
   ECR_REGISTRY: dkr.ecr.us-east-2.amazonaws.com
