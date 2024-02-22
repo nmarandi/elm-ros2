@@ -35,3 +35,25 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.ACCOUNT_ID }}.${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:latest
+
+  terraform:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Setup credentials in environment and Terraform Apply
+        run: |
+          export AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+          export AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          export AWS_DEFAULT_REGION=${{ env.AWS_REGION }}
+          terraform apply -auto-approve
